@@ -47,13 +47,10 @@ return {
   },
 }
 -- or using
----@module 'yazi-meta.nvim'
+---@module 'yazi-meta'
 ```
 
 ## Current Coverage
 
 - [x] Context APIs (cx object)
 - [x] Core APIs (ya object)
-- [-] Core APIs (ps object)
-- [-] UI APIs (ui object)
-- ...
