@@ -53,7 +53,7 @@ return {
 ## Current Coverage
 
 - [x] Context APIs (cx object)
-- [-] Core APIs (ya object)
+- [x] Core APIs (ya object)
 - [-] Core APIs (ps object)
 - [-] UI APIs (ui object)
 - ...

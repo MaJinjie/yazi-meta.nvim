@@ -161,6 +161,35 @@ function ya.dbg(msg, ...) end
 --- @see ya.dbg
 function ya.err(msg, ...) end
 
+--- @class yazi.ya.preview.Opts
+--- @field area yazi.ui.Rect Rect of the available preview area.
+--- @field file yazi.File File to be previewed.
+--- @field mime string String of the MIME type of the file.
+--- @field skip integer Number of units to skip. The units depend on your previewer, such as lines for code and percentages for videos.
+
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.preview_code
+--- This function is only available in the async context.
+---
+--- Preview the file as code into the specified area.
+---
+--- @param opts yazi.ya.preview.Opts The options of the preview
+--- @return string? err Error string if the preview fails; otherwise, nil.
+--- @return integer? upper_bound If the preview fails and it's because exceeds the maximum upper bound, return this bound; otherwise, nil.
+function ya.preview_code(opts) end
+
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.preview_widgets
+--- This function is only available in the async context.
+---
+--- Previeww_widgets allow plugin developers to dynamically generate and render custom preview interfaces based on file types and user requirements.
+--- By passing in a set of renderable widgets, developers can fully control the layout and display of preview content.
+---
+--- @param opts yazi.ya.preview.Opts The options of the preview
+--- @param widgets yazi.ui.Base[] List of renderable widgets.
+--- Each component is a UI component, These components will be rendered in the preview area in the order of the list.
+--- @return string? err Error string if the preview fails; otherwise, nil.
+--- @return integer? upper_bound If the preview fails and it's because exceeds the maximum upper bound, return this bound; otherwise, nil.
+function ya.preview_widgets(opts, widgets) end
+
 --- @see https://yazi-rs.github.io/docs/plugins/overview#async-context
 ---
 --- You can also obtain a small amount of app data from the sync context by calling a "sync function"
@@ -193,3 +222,106 @@ function ya.err(msg, ...) end
 --- @param fn fun(self, ...):R
 --- @return fun(...):R
 function ya.sync(fn) end
+
+--- @alias yazi.ya.target_os
+---|"linux"
+---|"macos"
+---|"ios"
+---|"freebsd"
+---|"dragonfly"
+---|"netbsd"
+---|"openbsd"
+---|"solaris"
+---|"android"
+---|"windows"
+
+--- Get the specific operating system in use.
+---
+--- @return yazi.ya.target_os
+function ya.target_os() end
+
+--- @alias yazi.ya.target_family
+---|"unix"
+---|"windows"
+---|"wasm"
+
+--- Get the family of the operating system.
+---
+--- @return yazi.ya.target_family
+function ya.target_family() end
+
+--- Get the hash of a given string.
+--- It is designed to work with algorithm-independent tasks, such as generating file cache names.
+---
+--- @param str string The string to calculate the hash for.
+--- @return string hash
+function ya.hash(str) end
+
+--- Quote characters that may have special meaning in a shell.
+---
+--- @param str string The string to be quoted.
+--- @return string # the string after quoting
+function ya.quote(str) end
+
+--- Truncate the text to the specified length.
+---
+--- @param text string The text to be truncaFed
+--- @param opts {max: integer, rtl?: boolean} The options of the truncation.
+--- - max: the maximum length of the text
+--- - rtl: whether the text is right-to-left
+function ya.truncate(text, opts) end
+
+--- This function is only available in the async context.
+--- Get the content of the system clipboard.
+---
+--- @return string
+function ya.clipboard() end
+
+--- This function is only available in the async context.
+--- Set the content of the system clipboard.
+---
+--- @param text string
+function ya.clipboard(text) end
+
+--- Get the current timestamp.
+---
+--- @return integer timestamp It is a float, the integer part represents the seconds, and the decimal part represents the milliseconds.
+function ya.time() end
+
+--- This function is only available in the async context.
+--- Waits until |secs| has elapsed.
+---
+--- @param secs integer The number of seconds to sleep, which is a positive float.
+function ya.sleep(secs) end
+
+--- Only available on Unix-like systems.
+--- Get the user id of the current user.
+---
+--- @return integer
+function ya.uid() end
+
+--- Only available on Unix-like systems.
+--- Get the group id of the current user.
+---
+--- @return integer
+function ya.gid() end
+
+--- This function is only available on Unix-like systems.
+--- Get the name of the user.
+---
+--- @param uid? integer The user id of the user. If not set, it will use the current user's id.
+--- @return string? Returns The name of the current user, if successful; otherwise, nil.
+function ya.user_name(uid) end
+
+--- Only available on Unix-like systems.
+--- Get the name of the user group.
+---
+--- @param gid? integer The group id of the user.If not set, it will use the current user's group id.
+--- @return string? gname The name of the current group, if successful; otherwise, nil.
+function ya.group_name(gid) end
+
+--- Only available on Unix-like systems.
+--- Get the name of the host.
+---
+--- @return string? hostname The hostname of the current machine, if successful; otherwise, nil.
+function ya.host_name() end
