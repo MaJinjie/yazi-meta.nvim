@@ -1,0 +1,39 @@
+--- @meta fs
+
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.fs-files
+---
+--- @class yazi.fs.Files
+--- @field [number] yazi.fs.File
+---
+--- MetaMethods:
+--- @metamethod __len()
+--- @metamethod __index(idx) Access the fs::File by index
+
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.fs-file
+---
+--- @class (exact) yazi.fs.File: yazi.File
+---
+---
+--- Methods:
+---
+--- The size of this file, returns an integer representing the size in bytes, or nil if its a directory and it has not been evaluated
+--- @field size fun():integer?
+---
+--- The mime-type of this file, which is a string, or nil if it's a directory or hasn't been lazily calculated at all
+--- @field mime fun():string?
+---
+--- The prefix of this file relative to CWD, which used in the flat view during search. For instance, if CWD is /foo, and the file is /foo/bar/baz, then the prefix is bar/
+--- @field prefix fun():string
+--- @field icon fun():yazi.Icon? The Icon of this file, [icon] rules are applied; if no rule matches, returns nil
+--- @field style fun():yazi.ui.Style? The Style of this file, [filetype] rules are applied; if no rule matches, returns nil
+--- @field is_hovere fun():boolean Whether this file is hovered
+--- @field is_yanked fun():boolean Whether this file is yanked
+--- @field is_selected fun():boolean Whether this file is selected
+---
+--- When users find a file using the find command, the status of the file - returns nil if it doesn't match the user's find keyword;
+--- otherwise, returns {idx, all}, where idx is the position of matched file, and all represents the number of all matched files.
+--- @field found fun():[integer, number]
+---
+---  TODO: Waiting for yazi document
+---
+--- @field highlights fun():any

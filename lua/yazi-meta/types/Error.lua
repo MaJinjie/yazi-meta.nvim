@@ -1,0 +1,13 @@
+--- @meta Error
+
+--- @see https://yazi-rs.github.io/docs/plugins/types#shared.error
+---
+--- @class (exact) yazi.Error
+--- @operator concat(string):string
+---
+--- Properties:
+--- @field code integer?
+---
+--- MetaMethods:
+--- @metamethod __tostring()
+--- @metamethod __concat(string)

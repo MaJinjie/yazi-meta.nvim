@@ -1,0 +1,11 @@
+--- @meta File
+
+--- @see https://yazi-rs.github.io/docs/plugins/types#shared.file
+---
+--- @class (exact) yazi.File
+---
+--- Properties:
+--- @field url yazi.Url The Url of this file
+--- @field cha yazi.Cha The Cha of this file
+--- @field link_to yazi.Url? The Url of this file pointing to, if it's a symlink; otherwise, nil
+--- @field name string The name of this file
