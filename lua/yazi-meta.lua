@@ -1,0 +1,3 @@
+---@module 'yazi-meta.cx'
+---@module 'yazi-meta.ya'
+---@module 'yazi-meta.ui'
