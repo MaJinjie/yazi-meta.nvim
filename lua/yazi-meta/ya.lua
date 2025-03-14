@@ -5,6 +5,11 @@
 --- @class YaziYa
 _G.ya = ...
 
+--- @class yazi.ya.permit
+--- @field drop fun(self)
+
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.hide
+---
 --- Hide Yazi to the secondary screen by returning to the terminal, completely controlled by the requested plugin.
 --- This method returns a permit for this resource. When it's necessary to restore the TUI display, call its drop() method.
 --- ```lua
@@ -21,6 +26,37 @@ _G.ya = ...
 --- @return yazi.ya.permit permit
 function ya.hide() end
 
+--- @class yazi.ya.file_cache.Opts
+--- @field file yazi.File The File to be cached.
+--- @field skip number The number of units to skip. It's units largely depend on your previewer, such as lines for code, and percentages for videos.
+
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.file_cache
+---
+--- Calculate the cached Url corresponding to the given file
+--- If the file is not allowed to be cached, such as it's ignored in the user config, or the file itself is a cache, returns nil.
+---
+--- @see yazi.ya.file_cache.Opts
+--- @param opts yazi.ya.file_cache.Opts The options of the cache
+--- @return yazi.Url url
+function ya.file_cache(opts) end
+
+--- Re-render the UI, can only be used in the sync context.
+--- For example:
+--- ```lua
+--- local update_state = ya.sync(function(self, new_state)
+--- self.state = new_state
+--- ya.render()
+--- end)
+--- ```
+function ya.render() end
+
+--- @alias yazi.SendableType yazi.SendableType[]
+--- |boolean
+--- |number
+--- |string
+--- |nil
+--- |yazi.Url
+
 --- Send a command to the [manager] without waiting for the executor to execute.
 --- ```lua
 --- ya.mgr_emit("my-cmd", { "hello", 123, foo = true, bar_baz = "world" })
@@ -33,10 +69,78 @@ function ya.hide() end
 --- @param args table<number|string, yazi.SendableType> the arguments of the command, which is a table with a number or string key and sendable values.
 function ya.mgr_emit(cmd, args) end
 
---- Request user input.
+--- @class yazi.ya.input.Opts
+--- @field title string The title of the input
+--- @field value? string The default value of the input
+--- @field position yazi.ya.input.Position The position of the input
+--- @field realtime? boolean Whether to report user input in real time
 ---
+--- The number of seconds to wait for the user to stop typing, which is a positive float.
+--- Can only be used when realtime = true.
+--- @field debounce? integer
+
+--- @class yazi.ya.input.receiver
+--- @field recv fun(self):string?, yazi.ya.input.event
+
+--- @class yazi.ya.input.Position
+--- @field [1] yazi.ya.input.position The origin position of the input
+--- @field x? integer The X offset from the origin position, which is an positive or negative integer.
+--- @field y? integer The Y offset from the origin position, which is an positive or negative integer.
+--- @field w integer The width of the input, which is an positive integer.
+--- @field h? integer The height of the input, which is an positive integer.
+
+--- @alias yazi.ya.input.position
+--- |"top-left" |"top-center" |"top-right"
+--- |"bottom-left" |"bottom-center" |"bottom-center"
+--- |"center"
+--- |"hovered"
+
+--- @alias yazi.ya.input.event
+--- | 0 Unknown error.
+--- | 1 The user has confirmed the input.
+--- | 2 The user has canceled the input.
+--- | 3 The user has changed the input (only if realtime is true).
+
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.input
+---
+--- Request user input once.
+--- ```lua
+---  local value, event = ya.input {
+---  title = "Archive name:",
+---  position = { "top-center", y = 3, w = 40 },
+---  }
+--- ```
+---
+--- Request user input multiple times.
+--- ```lua
+--- local receiver = ya.input {
+--- title = "Input in realtime:",
+--- position = { "center", w = 50 },
+--- realtime = true,
+--- }
+---
+--- while true do
+--- local value, event = receiver:recv()
+--- if not value then
+---   break
+--- end
+---
+--- ya.err(value)
+--- end
+--- ```
+--- @overload fun(opts: yazi.ya.input.Opts):yazi.ya.input.receiver A receiver that can accept user input events multiple times
 --- @param opts yazi.ya.input.Opts
+--- @return string? value The user input value carried by this event, which is a string if the event is non-zero; otherwise, nil.
+--- @return yazi.ya.input.event event The event type
 function ya.input(opts) end
+
+--- @class yazi.ya.notify.Opts
+--- @field title string The title of the notification, which is a string.
+--- @field content string The content of the notification, which is a string.
+--- @field timeout number The timeout of the notification, which is an non-negative float in seconds.
+--- @field level? yazi.ya.notify.level The level of the notification. Default is "info"
+
+--- @alias yazi.ya.notify.level "info"|"warn"|"error"
 
 --- Send a foreground notification to the user.
 ---
@@ -89,41 +193,3 @@ function ya.err(msg, ...) end
 --- @param fn fun(self, ...):R
 --- @return fun(...):R
 function ya.sync(fn) end
-
---- ```
---- ```
-
---- @class yazi.ya.permit
---- @field drop fun(self)
-
---- @class yazi.ya.input.Opts
---- @field title string The title of the input
---- @field value? string The default value of the input
---- @field position yazi.ya.input.position The position of the input
---- @field realtime? boolean Whether to report user input in real time
----
---- The number of seconds to wait for the user to stop typing, which is a positive float.
---- Can only be used when realtime = true.
---- @field debounce? integer
-
---- @class yazi.ya.input.position
---- @field [1] "top-left"|"top-center"|"top-right"|"bottom-left"|"bottom-center"|"bottom-right"|"center"|"hovered" The origin position of the input
---- @field x? integer The X offset from the origin position, which is an positive or negative integer.
---- @field y? integer The Y offset from the origin position, which is an positive or negative integer.
---- @field w integer The width of the input, which is an positive integer.
---- @field h? integer The height of the input, which is an positive integer.
-
---- @class yazi.ya.notify.Opts
---- @field title string The title of the notification, which is a string.
---- @field content string The content of the notification, which is a string.
---- @field timeout number The timeout of the notification, which is an non-negative float in seconds.
---- @field level? yazi.ya.notify.level The level of the notification. Default is "info"
-
---- @alias yazi.SendableType yazi.SendableType[]
---- |boolean
---- |number
---- |string
---- |nil
---- |yazi.Url
-
---- @alias yazi.ya.notify.level "info"|"warn"|"error"
