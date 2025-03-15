@@ -32,7 +32,7 @@
 ---
 --- When users find a file using the find command, the status of the file - returns nil if it doesn't match the user's find keyword;
 --- otherwise, returns {idx, all}, where idx is the position of matched file, and all represents the number of all matched files.
---- @field found fun():[integer, number]
+--- @field found fun():[integer, number]?
 ---
 ---  TODO: Waiting for yazi document
 ---

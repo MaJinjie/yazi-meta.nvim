@@ -8,7 +8,7 @@
 --- @field mode yazi.tab.Mode The tab::Mode of this tab.
 --- @field pref yazi.tab.Preference The tab::Preference of this tab.
 --- @field current yazi.tab.Folder The current folder within this tab, which is a tab::Folder.
---- @field parent yazi.tab.Folder? The parent folder within this tab, which is a tab::Folder if current has a parent; otherwise, nil.
+--- @field parent? yazi.tab.Folder The parent folder within this tab, which is a tab::Folder if current has a parent; otherwise, nil.
 --- @field selected yazi.tab.Selected  The selected files within this tab, which is a tab::Selected.
 --- @field preview yazi.tab.Preview The tab::Preview within this tab.
 
@@ -48,7 +48,7 @@
 --- @field cursor integer The cursor position of this folder, which is an integer
 --- @field window yazi.File A table of File in the visible area of this folder
 --- @field files yazi.fs.Files The fs::Files of this folder
---- @field hovered yazi.File The hovered File of this folder, or nil if there is no hovered file
+--- @field hovered? yazi.File The hovered File of this folder, or nil if there is no hovered file
 
 --- @class (exact) yazi.tab.Selected
 --- @field [number] yazi.Url
@@ -62,4 +62,4 @@
 ---
 --- Properties:
 --- @field skip integer The number of units to skip. The units largely depend on your previewer, such as lines for code and percentages for videos.
---- @field folder yazi.tab.Folder The tab::Folder being previewed, or nil if this preview is not for folders
+--- @field folder? yazi.tab.Folder The tab::Folder being previewed, or nil if this preview is not for folders

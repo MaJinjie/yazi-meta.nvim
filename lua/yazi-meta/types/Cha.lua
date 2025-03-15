@@ -21,9 +21,9 @@
 --- The length of this file, returns an integer representing the size in bytes.
 --- Note: that it can't reflect the size of a directory, use size() instead
 --- @field len integer
---- @field atime integer The accessed time of this file in Unix timestamp, or nil if it doesn't have a valid time
---- @field btime integer The birth time of this file in Unix timestamp, or nil if it doesn't have a valid time
---- @field mtime integer The modified time of this file in Unix timestamp, or nil if it doesn't have a valid time
+--- @field atime? integer The accessed time of this file in Unix timestamp, or nil if it doesn't have a valid time
+--- @field btime? integer The birth time of this file in Unix timestamp, or nil if it doesn't have a valid time
+--- @field mtime? integer The modified time of this file in Unix timestamp, or nil if it doesn't have a valid time
 --- @field uid integer (Only Unix) The user id of this file
 --- @field gid integer (Only Unix) The group id of this file
 --- @field nlink integer (Only Unix) The number of hard links to this file
