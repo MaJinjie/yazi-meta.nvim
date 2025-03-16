@@ -8,3 +8,6 @@
 
 ((identifier) @namespace.builtin
   (#eq? @namespace.builtin "ui"))
+
+((identifier) @namespace.builtin
+  (#eq? @namespace.builtin "ps"))
