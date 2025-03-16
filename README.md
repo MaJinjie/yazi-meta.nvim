@@ -7,6 +7,7 @@
 
 - [yazi-meta.nvim](#yazi-metanvim)
   - [Features](#features)
+  - [Requirements](#requirements)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Current Coverage](#current-coverage)
@@ -19,6 +20,10 @@ yazi-meta.nvim is a Neovim plugin that provides metadata and type completion sup
 - Type annotations for Yazi's plugin API
 - Auto-completion for Yazi-specific global objects
 - Hover documentation for API methods and types
+
+## Requirements
+
+- [yazi](https://github.com/sxyazi/yazi) 25.2.26 or later
 
 ## Installation
 
@@ -54,3 +59,6 @@ return {
 
 - [x] Context APIs (cx object)
 - [x] Core APIs (ya object)
+- [x] Core APIs (ps object)
+
+Most APIs currently implemented in this plugin have not been thoroughly validated through practical use. The documentation descriptions are primarily based on the [Yazi official documentation](https://yazi-rs.github.io/docs). Please feel free to submit corrections through issues or pull requests if you find any discrepancies.
