@@ -6,7 +6,7 @@
 _G.ya = ...
 
 --- @class yazi.ya.permit
---- @field drop fun(self) Release terminal control and restore TUI display
+--- @field drop fun(self: self) Release terminal control and restore TUI display
 
 --- @limit async-context
 ---
@@ -135,7 +135,7 @@ function ya.which(opts) end
 --- Can only be used when realtime = true.
 
 --- @class yazi.ya.input.receiver
---- @field recv fun(self):string?, yazi.ya.input.event
+--- @field recv fun(self: self):string?, yazi.ya.input.event
 
 --- @class yazi.ya.input.Position
 --- @field [1] yazi.ya.input.position The origin position of the input
@@ -240,7 +240,7 @@ function ya.preview_code(opts) end
 --- By passing in a set of renderable widgets, developers can fully control the layout and display of preview content.
 ---
 --- @param opts yazi.ya.preview.Opts The options of the preview
---- @param widgets yazi.ui.Base[] List of renderable widgets.
+--- @param widgets yazi.Ui[] List of renderable widgets.
 ---   Each component is a UI component, These components will be rendered in the preview area in the order of the list.
 --- @return string? err Error string if the preview fails; otherwise, nil.
 --- @return integer? upper_bound If the preview fails and it's because exceeds the maximum upper bound, return this bound; otherwise, nil.

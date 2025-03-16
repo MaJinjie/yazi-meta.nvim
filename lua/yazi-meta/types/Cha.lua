@@ -1,9 +1,7 @@
 --- @meta Cha
 
---- @see https://yazi-rs.github.io/docs/plugins/types#shared.cha
----
---- Cha means one file's characteristics.
 --- @class (exact) yazi.Cha
+--- Cha means one file's characteristics.
 ---
 --- Properties:
 --- @field is_dir boolean Whether this file is a directory
@@ -17,10 +15,8 @@
 --- @field is_sock boolean Whether this file is a socket
 --- @field is_exec boolean Whether this file is executable
 --- @field is_sticky boolean Whether this file has the sticky bit set
----
---- The length of this file, returns an integer representing the size in bytes.
---- Note: that it can't reflect the size of a directory, use size() instead
---- @field len integer
+--- @field len integer The length of this file, returns an integer representing the size in bytes.
+---   Note: that it can't reflect the size of a directory, use size() instead
 --- @field atime? integer The accessed time of this file in Unix timestamp, or nil if it doesn't have a valid time
 --- @field btime? integer The birth time of this file in Unix timestamp, or nil if it doesn't have a valid time
 --- @field mtime? integer The modified time of this file in Unix timestamp, or nil if it doesn't have a valid time
@@ -29,4 +25,6 @@
 --- @field nlink integer (Only Unix) The number of hard links to this file
 ---
 --- Methods:
---- @field perm fun():string? Unix permissions of this file in string, e.g. drwxr-xr-x. For Windows, it's always nil
+--- @field perm fun(self: self):string? Unix permissions of this file in string, e.g. drwxr-xr-x. For Windows, it's always nil
+---
+--- @see https://yazi-rs.github.io/docs/plugins/types#shared.cha

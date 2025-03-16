@@ -1,7 +1,5 @@
 --- @meta mgr
 
---- @see https://yazi-rs.github.io/docs/plugins/types#app-data.mgr-tabs
----
 --- @class yazi.mgr.Tabs
 ---
 --- Properties:
@@ -10,9 +8,9 @@
 --- MetaMethods:
 --- @metamethod __len()
 --- @metamethod __index(idx) Access the tab::Tab by index
-
---- @see https://yazi-rs.github.io/docs/plugins/types#app-data.mgr-yanked
 ---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.mgr-tabs
+
 --- @class yazi.mgr.Yanked
 --- @field [number] yazi.Url
 ---
@@ -22,3 +20,5 @@
 --- MetaMethods:
 --- @metamethod __len()
 --- @metamethod __pairs() Iterate over the yanked Urls.
+---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.mgr-yanked

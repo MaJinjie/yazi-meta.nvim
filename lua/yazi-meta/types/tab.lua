@@ -1,7 +1,5 @@
 --- @meta tab
 
---- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-tab
----
 --- @class (exact) yazi.tab.Tab
 ---
 --- Properties:
@@ -11,11 +9,11 @@
 --- @field parent? yazi.tab.Folder The parent folder within this tab, which is a tab::Folder if current has a parent; otherwise, nil.
 --- @field selected yazi.tab.Selected  The selected files within this tab, which is a tab::Selected.
 --- @field preview yazi.tab.Preview The tab::Preview within this tab.
-
---- Visual mode status.
---- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-mode
 ---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-tab
+
 --- @class (exact) yazi.tab.Mode
+--- Visual mode status.
 ---
 --- Properties:
 --- @field is_select boolean Whether the mode is select
@@ -24,9 +22,10 @@
 ---
 --- MetaMethods:
 --- @metamethod __tostring()
-
---- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-preference
+---   return "select"|"unset"|"normal"
 ---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-mode
+
 --- @class (exact) yazi.tab.Preference
 ---
 --- Properties:
@@ -37,9 +36,9 @@
 --- @field sort_translit boolean Transliterate filenames for sorting.
 --- @field linemode string Display information associated with the file on the right side of the file list row.
 --- @field show_hidden true Show hidden files.
-
---- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-folder
 ---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-preference
+
 --- @class (exact) yazi.tab.Folder
 ---
 --- Properties:
@@ -49,17 +48,23 @@
 --- @field window yazi.File A table of File in the visible area of this folder
 --- @field files yazi.fs.Files The fs::Files of this folder
 --- @field hovered? yazi.File The hovered File of this folder, or nil if there is no hovered file
+---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-folder
 
 --- @class (exact) yazi.tab.Selected
 --- @field [number] yazi.Url
 ---
 --- MetaMethods:
+--- @operator len:integer
 --- @metamethod __len()
 --- @metamethod __pairs() Iterate over the selected Urls.
-
 ---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-selected
+
 --- @class (exact) yazi.tab.Preview
 ---
 --- Properties:
 --- @field skip integer The number of units to skip. The units largely depend on your previewer, such as lines for code and percentages for videos.
 --- @field folder? yazi.tab.Folder The tab::Folder being previewed, or nil if this preview is not for folders
+---
+--- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-preview
