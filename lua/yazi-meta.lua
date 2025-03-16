@@ -3,3 +3,4 @@
 ---@module 'yazi-meta.ui'
 ---@module 'yazi-meta.ps'
 ---@module 'yazi-meta.fs'
+---@module 'yazi-meta.Command'

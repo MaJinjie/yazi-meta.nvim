@@ -61,5 +61,6 @@ return {
 - [x] Core APIs (ya object)
 - [x] Core APIs (ps object)
 - [x] Core APIs (fs object)
+- [x] Core APIs (Command object)
 
 Most APIs currently implemented in this plugin have not been thoroughly validated through practical use. The documentation descriptions are primarily based on the [Yazi official documentation](https://yazi-rs.github.io/docs). Please feel free to submit corrections through issues or pull requests if you find any discrepancies.
