@@ -11,3 +11,6 @@
 
 ((identifier) @namespace.builtin
   (#eq? @namespace.builtin "ps"))
+
+((identifier) @namespace.builtin
+  (#eq? @namespace.builtin "fs"))

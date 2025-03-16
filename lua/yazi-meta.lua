@@ -2,3 +2,4 @@
 ---@module 'yazi-meta.ya'
 ---@module 'yazi-meta.ui'
 ---@module 'yazi-meta.ps'
+---@module 'yazi-meta.fs'

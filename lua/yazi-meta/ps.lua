@@ -1,6 +1,6 @@
 --- @meta ps
 
---- @class yazi.ps
+--- @class YaziPs
 ---
 --- @limit sync-context
 --- Yazi's pub-sub system for cross-instance communication and state persistence.
