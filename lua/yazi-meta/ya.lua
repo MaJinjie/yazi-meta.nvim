@@ -1,15 +1,14 @@
 --- @meta ya
 
---- @see https://yazi-rs.github.io/docs/plugins/utils
----
 --- @class YaziYa
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils
 _G.ya = ...
 
 --- @class yazi.ya.permit
 --- @field drop fun(self) Release terminal control and restore TUI display
 
---- @async
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.hide
+--- @limit async-context
 ---
 --- Hide Yazi to the secondary screen by returning to the terminal, completely controlled by the requested plugin.
 --- This method returns a permit for this resource. When it's necessary to restore the TUI display, call its drop() method.
@@ -23,14 +22,14 @@ _G.ya = ...
 --- otherwise an error will be thrown, effectively avoiding deadlocks.
 ---
 --- @return yazi.ya.permit permit
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.hide
 function ya.hide() end
 
 --- @class yazi.ya.file_cache.Opts
 --- @field file yazi.File The File to be cached.
 --- @field skip number The number of units to skip. It's units largely depend on your previewer, such as lines for code, and percentages for videos.
 
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.file_cache
----
 --- Calculate the cached Url corresponding to the given file
 --- If the file is not allowed to be cached, such as it's ignored in the user config, or the file itself is a cache, returns nil.
 ---
@@ -44,9 +43,13 @@ function ya.hide() end
 ---
 --- @param opts yazi.ya.file_cache.Opts The options of the cache
 --- @return yazi.Url url
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.file_cache
 function ya.file_cache(opts) end
 
---- Re-render the UI, can only be used in the sync context.
+--- @limit sync-context
+---
+--- Re-render the UI.
 --- For example:
 --- ```lua
 --- local update_state = ya.sync(function(self, new_state)
@@ -54,14 +57,9 @@ function ya.file_cache(opts) end
 ---   ya.render()
 --- end)
 --- ```
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.render
 function ya.render() end
-
---- @alias yazi.SendableType yazi.SendableType[]
---- |boolean
---- |number
---- |string
---- |nil
---- |yazi.Url
 
 --- Send a command to the [manager] without waiting for the executor to execute.
 --- ```lua
@@ -75,29 +73,31 @@ function ya.render() end
 --- @param args table<number|string, yazi.SendableType> the arguments of the command, which is a table with a number or string key and sendable values.
 function ya.mgr_emit(cmd, args) end
 
---- @async
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.image_show
+--- @limit async-context
+---
 --- Display the given image within the specified area, and the image will downscale to fit that area automatically.
 ---
 --- @param url yazi.Url The Url of the image.
 --- @param rect yazi.ui.Rect The Rect of the area.
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.image_show
 function ya.image_show(url, rect) end
 
---- @async
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.image_precache
+--- @limit async-context
 ---
 --- Pre-cache the image to a specified url based on user-configured max_width and max_height.
 ---
 --- @param src yazi.Url The source Url of the image.
 --- @param dist yazi.Url The destination Url of the image.
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.image_precache
 function ya.image_precache(src, dist) end
 
 --- @class yazi.ya.cand
 --- @field on string|string[] The key to be prompted, which is a string or a table of strings if multiple keys.
 --- @field desc? string The description of the key
 
---- @async
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.which
+--- @limit async-context
 ---
 --- Prompt users with a set of available keys.
 ---
@@ -117,6 +117,8 @@ function ya.image_precache(src, dist) end
 ---   cands -  the key candidates
 ---   silent - whether to show the UI of key indicator
 --- @return integer? index
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.which
 function ya.which(opts) end
 
 --- @class yazi.ya.input.Opts
@@ -150,9 +152,8 @@ function ya.which(opts) end
 --- | 2 The user has canceled the input.
 --- | 3 The user has changed the input (only if realtime is true).
 
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.input
----
 --- Request user input once.
+--- For examples:
 --- ```lua
 ---  local value, event = ya.input {
 ---  title = "Archive name:",
@@ -181,6 +182,8 @@ function ya.which(opts) end
 --- @param opts yazi.ya.input.Opts
 --- @return string? value The user input value carried by this event, which is a string if the event is non-zero; otherwise, nil.
 --- @return yazi.ya.input.event event The event type
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.input
 function ya.input(opts) end
 
 --- @class yazi.ya.notify.Opts
@@ -216,32 +219,34 @@ function ya.err(msg, ...) end
 --- @field mime string String of the MIME type of the file.
 --- @field skip integer Number of units to skip. The units depend on your previewer, such as lines for code and percentages for videos.
 
---- @async
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.preview_code
+--- @limit async-context
 ---
 --- Preview the file as code into the specified area.
 ---
 --- @param opts yazi.ya.preview.Opts The options of the preview
 --- @return string? err Error string if the preview fails; otherwise, nil.
 --- @return integer? upper_bound If the preview fails and it's because exceeds the maximum upper bound, return this bound; otherwise, nil.
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.preview_code
 function ya.preview_code(opts) end
 
---- @async
---- @see https://yazi-rs.github.io/docs/plugins/utils#ya.preview_widgets
+--- @limit async-context
 ---
 --- Previeww_widgets allow plugin developers to dynamically generate and render custom preview interfaces based on file types and user requirements.
 --- By passing in a set of renderable widgets, developers can fully control the layout and display of preview content.
 ---
 --- @param opts yazi.ya.preview.Opts The options of the preview
 --- @param widgets yazi.ui.Base[] List of renderable widgets.
---- Each component is a UI component, These components will be rendered in the preview area in the order of the list.
+---   Each component is a UI component, These components will be rendered in the preview area in the order of the list.
 --- @return string? err Error string if the preview fails; otherwise, nil.
 --- @return integer? upper_bound If the preview fails and it's because exceeds the maximum upper bound, return this bound; otherwise, nil.
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#ya.preview_widgets
 function ya.preview_widgets(opts, widgets) end
 
---- @see https://yazi-rs.github.io/docs/plugins/overview#async-context
----
 --- You can also obtain a small amount of app data from the sync context by calling a "sync function"
+---
+--- For examples:
 --- ```lua
 --- -- ~/.config/yazi/plugins/my-async-plugin.yazi/main.lua
 --- local set_state = ya.sync(function(state, a)
@@ -270,6 +275,8 @@ function ya.preview_widgets(opts, widgets) end
 --- @generic R
 --- @param fn fun(self, ...):R
 --- @return fun(...):R
+---
+--- @see https://yazi-rs.github.io/docs/plugins/overview#async-context
 function ya.sync(fn) end
 
 --- @alias yazi.ya.target_os
@@ -320,13 +327,13 @@ function ya.quote(str) end
 ---   rtl - whether the text is right-to-left
 function ya.truncate(text, opts) end
 
---- @async
+--- @limit async-context
 --- Get the content of the system clipboard.
 ---
 --- @return string
 function ya.clipboard() end
 
---- @async
+--- @limit async-context
 --- Set the content of the system clipboard.
 ---
 --- @param text string
@@ -337,39 +344,39 @@ function ya.clipboard(text) end
 --- @return integer timestamp It is a float, the integer part represents the seconds, and the decimal part represents the milliseconds.
 function ya.time() end
 
---- @async
+--- @limit async-context
 --- Waits until |secs| has elapsed.
 ---
 --- @param secs integer The number of seconds to sleep, which is a positive float.
 function ya.sleep(secs) end
 
---- @unix
+--- @limit unix-os
 --- Get the user id of the current user.
 ---
 --- @return integer
 function ya.uid() end
 
---- @unix
+--- @limit unix-os
 --- Get the group id of the current user.
 ---
 --- @return integer
 function ya.gid() end
 
---- @unix
+--- @limit unix-os
 --- Get the name of the user.
 ---
 --- @param uid? integer The user id of the user. If not set, it will use the current user's id.
 --- @return string? Returns The name of the current user, if successful; otherwise, nil.
 function ya.user_name(uid) end
 
---- @unix
+--- @limit unix-os
 --- Get the name of the user group.
 ---
 --- @param gid? integer The group id of the user.If not set, it will use the current user's group id.
 --- @return string? gname The name of the current group, if successful; otherwise, nil.
 function ya.group_name(gid) end
 
---- @unix
+--- @limit unix-os
 --- Get the name of the host.
 ---
 --- @return string? hostname The hostname of the current machine, if successful; otherwise, nil.

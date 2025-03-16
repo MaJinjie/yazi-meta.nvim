@@ -13,7 +13,6 @@
 ---
 --- @class (exact) yazi.fs.File: yazi.File
 ---
----
 --- Methods:
 ---
 --- The size of this file, returns an integer representing the size in bytes, or nil if its a directory and it has not been evaluated
@@ -26,7 +25,7 @@
 --- @field prefix fun():string
 --- @field icon fun():yazi.Icon? The Icon of this file, [icon] rules are applied; if no rule matches, returns nil
 --- @field style fun():yazi.ui.Style? The Style of this file, [filetype] rules are applied; if no rule matches, returns nil
---- @field is_hovere fun():boolean Whether this file is hovered
+--- @field is_hovered fun():boolean Whether this file is hovered
 --- @field is_yanked fun():boolean Whether this file is yanked
 --- @field is_selected fun():boolean Whether this file is selected
 ---
@@ -37,3 +36,4 @@
 ---  TODO: Waiting for yazi document
 ---
 --- @field highlights fun():any
+local as
