@@ -73,6 +73,10 @@ function ya.render() end
 --- @param args table<number|string, yazi.SendableType> the arguments of the command, which is a table with a number or string key and sendable values.
 function ya.mgr_emit(cmd, args) end
 
+--- @see ya.mgr_emit
+--- @deprecated ya.manager_emit() has been deprecated in favor of the new ya.mgr_emit()
+function ya.manager_emit(...) end
+
 --- @limit async-context
 ---
 --- Display the given image within the specified area, and the image will downscale to fit that area automatically.
