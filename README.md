@@ -57,10 +57,19 @@ return {
 
 ## Current Coverage
 
-- [x] Context APIs (cx object)
-- [x] Core APIs (ya object)
-- [x] Core APIs (ps object)
-- [x] Core APIs (fs object)
-- [x] Core APIs (Command object)
+- [x] [Plugins/Types](https://yazi-rs.github.io/docs/plugins/types)
+- [x] [Plugins/Layout](https://yazi-rs.github.io/docs/plugins/layout)
+- [x] [Plugins/Utils](https://yazi-rs.github.io/docs/plugins/utils)
 
-Most APIs currently implemented in this plugin have not been thoroughly validated through practical use. The documentation descriptions are primarily based on the [Yazi official documentation](https://yazi-rs.github.io/docs). Please feel free to submit corrections through issues or pull requests if you find any discrepancies.
+TODO:
+
+- [Plugins/Config](https://yazi-rs.github.io/docs/plugins/config)
+- `PluginSpec` The specification of the yazi plugin, which is the return value of the main.lua module.
+  For example, the peek of the object, Seek method
+- Some special objects related to yazi.
+  For example: Status, Header
+
+> [!NOTE]
+> Most APIs currently implemented in this plugin have not been thoroughly validated through practical use.
+> The documentation descriptions are primarily based on the [Yazi official documentation](https://yazi-rs.github.io/docs).
+> Please feel free to submit corrections through issues or pull requests if you find any discrepancies.
