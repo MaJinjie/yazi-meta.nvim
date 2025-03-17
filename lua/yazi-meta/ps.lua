@@ -1,6 +1,6 @@
 --- @meta ps
 
---- @class YaziPs
+--- @class yazi.Ps
 ---
 --- @limit sync-context
 --- Yazi's pub-sub system for cross-instance communication and state persistence.
@@ -8,7 +8,6 @@
 --- See [DDS](https://yazi-rs.github.io/docs/dds) for details.
 ---
 --- @see https://yazi-rs.github.io/docs/plugins/utils#ps
-_G.ps = ...
 
 --- Publish a message to the current instance.
 --- all plugins subscribed through sub() for this kind will receive it, achieving internal communication within the instance.

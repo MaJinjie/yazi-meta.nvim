@@ -1,11 +1,10 @@
 --- @meta fs
 
---- @see https://yazi-rs.github.io/docs/plugins/utils#fs
----
---- @class YaziFs
+--- @class yazi.Fs
 ---
 --- @limit async-context
-_G.fs = ...
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#fs
 
 --- This function was added to compensate for the lack of a getcwd in Lua. It is used to retrieve the directory of the last chdir call.
 ---

@@ -1,6 +1,22 @@
----@module 'yazi-meta.cx'
----@module 'yazi-meta.ya'
----@module 'yazi-meta.ui'
----@module 'yazi-meta.ps'
----@module 'yazi-meta.fs'
----@module 'yazi-meta.Command'
+--- @meta export
+
+--- @class yazi.Cx
+_G.cx = ...
+
+--- @class yazi.Url
+_G.Url = ...
+
+--- @class yazi.Ya
+_G.ya = ...
+
+--- @class yazi.Ps
+_G.ps = ...
+
+--- @class yazi.Fs
+_G.fs = ...
+
+--- @class yazi.Ui
+_G.ui = ...
+
+--- @class yazi.Command
+_G.Command = ...

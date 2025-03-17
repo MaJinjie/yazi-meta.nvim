@@ -1,11 +1,10 @@
 --- @meta ya
 
---- @class YaziYa
+--- @class yazi.Ya
 ---
 --- @see https://yazi-rs.github.io/docs/plugins/utils
-_G.ya = ...
 
---- @class yazi.ya.permit
+--- @class yazi.ya.hide.permit
 --- @field drop fun(self: self) Release terminal control and restore TUI display
 
 --- @limit async-context
@@ -21,7 +20,7 @@ _G.ya = ...
 --- ya.hide() cannot be called again before the previous permit is dropped,
 --- otherwise an error will be thrown, effectively avoiding deadlocks.
 ---
---- @return yazi.ya.permit permit
+--- @return yazi.ya.hide.permit permit
 ---
 --- @see https://yazi-rs.github.io/docs/plugins/utils#ya.hide
 function ya.hide() end
@@ -240,7 +239,7 @@ function ya.preview_code(opts) end
 --- By passing in a set of renderable widgets, developers can fully control the layout and display of preview content.
 ---
 --- @param opts yazi.ya.preview.Opts The options of the preview
---- @param widgets yazi.Ui[] List of renderable widgets.
+--- @param widgets yazi.ui.RenderableElement[] List of renderable widgets.
 ---   Each component is a UI component, These components will be rendered in the preview area in the order of the list.
 --- @return string? err Error string if the preview fails; otherwise, nil.
 --- @return integer? upper_bound If the preview fails and it's because exceeds the maximum upper bound, return this bound; otherwise, nil.

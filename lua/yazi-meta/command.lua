@@ -1,21 +1,22 @@
---- @meta Command
+--- @meta command
 
---- HACK: @overload and @enum cannot be applied to the same variable
+--- @class yazi.Command: yazi.command.Command
 ---
---- @enum yazi.command.cfg
----   NULL - Discard the stream
----   PIPED - Pipe the stream
----   INHERIT - Inherit the stream
-local _cfg = {
-  NULL = ...,
-  PIPED = ...,
-  INHERIT = ...,
-}
+--- @see yazi.command.Command
 
---- @class YaziCommand
---- @overload fun(cmd: string):yazi.Command
+------------------------------------ Command ------------------------------------
+
+--- @alias yazi.command.Command.cfg
+--- |`Command.NULL`
+--- |`Command.PIPED`
+--- |`Command.INHERIT`
+
+--- @class yazi.command.Command
+--- @overload fun(cmd: string):self
+---
 --- @limit async-context
 --- You can invoke external programs through |Command|.
+---
 --- Example:
 --- ```lua
 --- local child, err = Command("ls")
@@ -27,86 +28,83 @@ local _cfg = {
 --- It takes better advantage of the benefits of concurrent scheduling.
 --- However, it can only be used in async contexts, such as preloaders, previewers, and async functional plugins.
 ---
+--- Properties:
+--- @field NULL ... Discard the stream.
+--- @field PIPED ... Pipe the stream.
+--- @field INHERIT ... Inherit the stream.
+---
 --- @see https://yazi-rs.github.io/docs/plugins/utils#command
-_G.Command = {
-  NULL = _cfg.NULL,
-  PIPED = _cfg.PIPED,
-  INHERIT = _cfg.INHERIT,
-}
-
---- @class yazi.Command
-local command = {}
 
 --- Append an argument to the command.
 ---
 --- @param arg string The argument to be appended
 --- @return self
-function command:arg(arg) end
+function Command:arg(arg) end
 
 --- Append multiple arguments to the command.
 ---
 --- @param args string[] The arguments to be appended
 --- @return self
-function command:args(args) end
+function Command:args(args) end
 
 --- Set the current working directory of the command.
 ---
 --- @param dir string The directory of the command
 --- @return self
-function command:cwd(dir) end
+function Command:cwd(dir) end
 
 --- Append an environment variable to the command.
 ---
 --- @param key string The key of the environment variable
 --- @param value string The value of the environment variable
 --- @return self
-function command:env(key, value) end
+function Command:env(key, value) end
 
 --- Set the stdin of the command.
 ---
---- @param cfg yazi.command.cfg|integer The configuration of the stdin
+--- @param cfg yazi.command.Command.cfg|integer The configuration of the stdin
 --- @return self? stdin If not set, the stdin will be null.
-function command:stdin(cfg) end
+function Command:stdin(cfg) end
 
 --- Set the stdout of the command.
 ---
---- @param cfg yazi.command.cfg|integer The configuration of the stdout
+--- @param cfg yazi.command.Command.cfg|integer The configuration of the stdout
 --- @return self? stdout If not set, the stdout will be null.
-function command:stdout(cfg) end
+function Command:stdout(cfg) end
 
 --- Set the stderr of the command.
 ---
---- @param cfg yazi.command.cfg|integer The configuration of the stderr
+--- @param cfg yazi.command.Command.cfg|integer The configuration of the stderr
 --- @return self? stderr If not set, the stderr will be null.
-function command:stderr(cfg) end
+function Command:stderr(cfg) end
 
 --- Spawn the command.
 ---
---- @return yazi.Child? child The Child of the command if successful; otherwise, nil.
+--- @return yazi.command.Child? child The Child of the command if successful; otherwise, nil.
 --- @return yazi.Error? err The error if the operation is failed
-function command:spawn() end
+function Command:spawn() end
 
 --- Spawn the command and wait for it to finish.
 ---
---- @return yazi.Output? output The Output of the command if successful; otherwise, nil.
+--- @return yazi.command.Output? output The Output of the command if successful; otherwise, nil.
 --- @return yazi.Error? err The error if the operation is failed
-function command:output() end
+function Command:output() end
 
 --- Executes the command as a child process, waiting for it to finish and collecting its exit status.
 ---
---- @return yazi.Status? status The Status of the child process if successful; otherwise, nil.
+--- @return yazi.command.Status? status The Status of the child process if successful; otherwise, nil.
 --- @return yazi.Error? err The error if the operation is failed
-function command:status() end
+function Command:status() end
 
------------------------------- Child ------------------------------
+------------------------------------ Child ------------------------------------
 
---- @alias yazi.command.event
+--- @alias yazi.command.Child.event
 --- | 0 The data comes from stdout
 --- | 1 The data comes from stderr
 --- | 2 There's no data to read from both stdout and stderr
 --- | 3 Timeout (only available in |read_line_with()|)
 
---- @class yazi.Child
+--- @class yazi.command.Child
 --- This object is created by Command:spawn() and represents a running child process.
 --- You can access the runtime data of this process through its proprietary methods.
 ---
@@ -118,13 +116,13 @@ local child = ...
 ---
 --- @param len integer Read the size of the data
 --- @return string data Read data
---- @return yazi.command.event event indicates the source of the data
+--- @return yazi.command.Child.event event indicates the source of the data
 function child:read(len) end
 
 --- Similar to |read()|, but it reads data line by line.
 ---
 --- @return string data Read data
---- @return yazi.command.event event indicates the source of the data
+--- @return yazi.command.Child.event event indicates the source of the data
 ---
 --- @see yazi.Child.read
 function child:read_line() end
@@ -134,7 +132,7 @@ function child:read_line() end
 --- @param opts {timeout: integer}
 ---   timeout - Timeout in milliseconds
 --- @return string data Read data
---- @return yazi.command.event event indicates the source of the data
+--- @return yazi.command.Child.event event indicates the source of the data
 ---
 --- @see yazi.Child.read
 function child:read_line_with(opts) end
@@ -161,13 +159,13 @@ function child:flush() end
 
 --- Wait for the child process to finish.
 ---
---- @return yazi.Status? status The Status of the child process if successful; otherwise, nil.
+--- @return yazi.command.Status? status The Status of the child process if successful; otherwise, nil.
 --- @return yazi.Error? err The error if the operation is failed.
 function child:wait() end
 
 --- Wait for the child process to finish and get the output.
 ---
---- @return yazi.Output? output The Output of the child process if successful; otherwise, nil.
+--- @return yazi.command.Output? output The Output of the child process if successful; otherwise, nil.
 --- @return yazi.Error? err The error if the operation is failed.
 function child:wait_with_output() end
 
@@ -204,24 +202,29 @@ function child:take_stdout() end
 ---
 --- @return integer stream_id
 ---
---- @see yazi.Child.take_stdin View Note
---- @see yazi.Child.take_stdout View Example
+--- @see yazi.Child.take_stdin Note
+--- @see yazi.Child.take_stdout Example
 function child:take_stderr() end
 
------------------------------- Output ------------------------------
+------------------------------------ Output ------------------------------------
 
---- @class yazi.Output
+--- @class yazi.command.Output
 ---
 --- Properties:
---- @field status yazi.Status The Status of the child process.
+--- @field status yazi.command.Status The Status of the child process.
 --- @field stdout string The stdout of the child process
 --- @field stderr string The stderr of the child process
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#output
 
------------------------------- Status ------------------------------
+------------------------------------ Status ------------------------------------
 
---- @class yazi.Status
---- This object represents the exit status of a child process, and it is created by |wait()|, or |output()|.
+--- @class yazi.command.Status
 ---
 --- Properties:
 --- @field success boolean Whether the child process exited successfully
 --- @field code integer The exit code of the child process
+---
+--- This object represents the exit status of a child process, and it is created by |wait()|, or |output()|.
+---
+--- @see https://yazi-rs.github.io/docs/plugins/utils#status
