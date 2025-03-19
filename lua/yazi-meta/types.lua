@@ -1,6 +1,7 @@
 --- @meta shared
 
 ------------------------------------ Url ------------------------------------
+
 --- @class yazi.Url
 --- @overload fun(path: string):self Create a Url
 ---
@@ -38,6 +39,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#shared.url
 
 ------------------------------------ Cha ------------------------------------
+
 --- @class yazi.Cha
 ---
 --- Properties:
@@ -69,6 +71,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#shared.cha
 
 ------------------------------------ File ------------------------------------
+
 --- @class yazi.File
 ---
 --- Properties:
@@ -80,6 +83,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#shared.file
 
 ------------------------------------ Icon ------------------------------------
+
 --- @class yazi.Icon
 ---
 --- Properties:
@@ -89,6 +93,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#shared.icon
 
 ------------------------------------ Error ------------------------------------
+
 --- @class yazi.Error
 ---
 --- Properties:
@@ -101,9 +106,11 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#shared.error
 
 ------------------------------------ Range ------------------------------------
+
 --- TODO:
 
 ------------------------------------ Window ------------------------------------
+
 --- @class yazi.Window
 ---
 --- Properties:
@@ -113,6 +120,7 @@
 --- @field height number  The height of this window in pixels
 
 ------------------------------------ Others ------------------------------------
+
 --- @alias yazi.SendableType yazi.SendableType[]
 --- |boolean
 --- |number

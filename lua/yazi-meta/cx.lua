@@ -13,6 +13,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data
 
 ------------------------------------ Tasks ------------------------------------
+
 --- @class yazi.cx.Tasks
 ---
 --- Properties:
@@ -30,6 +31,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tasks-tasks
 
 ------------------------------------ Tab ------------------------------------
+
 --- @class yazi.cx.Tab
 ---
 --- Properties:
@@ -43,6 +45,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-tab
 
 ------------------------------------ Tabs ------------------------------------
+
 --- @class yazi.cx.Tabs
 ---
 --- Properties:
@@ -55,6 +58,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.mgr-tabs
 
 ------------------------------------ Mode ------------------------------------
+
 --- @class yazi.cx.Mode
 ---
 --- Properties:
@@ -70,6 +74,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-mode
 
 ------------------------------------ Preference ------------------------------------
+
 --- @class yazi.cx.Preference
 ---
 --- Properties:
@@ -84,6 +89,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-preference
 
 ------------------------------------ Folder ------------------------------------
+
 --- @class yazi.cx.Folder
 ---
 --- Properties:
@@ -97,6 +103,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-folder
 
 ------------------------------------ Selected ------------------------------------
+
 --- @class yazi.cx.Selected
 --- @field [number] yazi.Url
 ---
@@ -107,6 +114,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-selected
 
 ------------------------------------ Preview ------------------------------------
+
 --- @class yazi.cx.Preview
 ---
 --- Properties:
@@ -116,6 +124,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.tab-preview
 
 ------------------------------------ Yanked ------------------------------------
+
 --- @class yazi.cx.Yanked
 --- @field [number] yazi.Url
 ---
@@ -129,6 +138,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.mgr-yanked
 
 ------------------------------------ File ------------------------------------
+
 --- @class yazi.cx.File: yazi.File
 ---
 --- Methods:
@@ -150,6 +160,7 @@
 --- @see https://yazi-rs.github.io/docs/plugins/types#app-data.fs-file
 
 ------------------------------------ Files ------------------------------------
+
 --- @class yazi.cx.Files
 --- @field [number] yazi.cx.File
 ---
